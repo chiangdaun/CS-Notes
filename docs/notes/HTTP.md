@@ -62,7 +62,7 @@
 
 URI 包含 URL 和 URN。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/417cb02e-853d-4288-a36e-9161ded2c9fd_200.png" width="600px"> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/8441b2c4-dca7-4d6b-8efb-f22efccaf331.png" width="500px"> </div><br>
 
 ## 请求和响应报文
 
@@ -587,7 +587,7 @@ Accept-Ranges: bytes
 
 ## 分块传输编码
 
-Chunked Transfer Coding，可以把数据分割成多块，让浏览器逐步显示页面。
+Chunked Transfer Encoding，可以把数据分割成多块，让浏览器逐步显示页面。
 
 ## 多部分对象集合
 
@@ -776,7 +776,7 @@ GET 用于获取资源，而 POST 用于传输实体主体。
 
 GET 和 POST 的请求都能使用额外的参数，但是 GET 的参数是以查询字符串出现在 URL 中，而 POST 的参数存储在实体主体中。不能因为 POST 参数存储在实体主体中就认为它的安全性更高，因为照样可以通过一些抓包工具（Fiddler）查看。
 
-因为 URL 只支持 ASCII 码，因此 GET 的参数中如果存在中文等字符就需要先进行编码。例如 `中文` 会转换为 `%E4%B8%AD%E6%96%87`，而空格会转换为 `%20`。POST 参考支持标准字符集。
+因为 URL 只支持 ASCII 码，因此 GET 的参数中如果存在中文等字符就需要先进行编码。例如 `中文` 会转换为 `%E4%B8%AD%E6%96%87`，而空格会转换为 `%20`。POST 参数支持标准字符集。
 
 ```
 GET /test/demo_form.asp?name1=value1&name2=value2 HTTP/1.1
@@ -881,5 +881,5 @@ DELETE /idX/delete HTTP/1.1   -> Returns 404
 
 
 
-</br><div align="center">⭐️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 📚 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
+</br><div align="center">🎨️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
 <div align="center"><img width="180px" src="https://cyc-1256109796.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg"></img></div>

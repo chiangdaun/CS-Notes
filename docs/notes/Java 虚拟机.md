@@ -30,7 +30,7 @@
 
 # 一、运行时数据区域
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/83e9c5ed-35a1-41fd-b0dd-ce571969b5f3_200.png" width="500px"> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/5778d113-8e13-4c53-b5bf-801e58080b97.png" width="400px"> </div><br>
 
 ## 程序计数器
 
@@ -40,7 +40,7 @@
 
 每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/ff5b89ac-798e-4fbc-b0ce-da2fc2358570.jpg"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/8442519f-0b4d-48f4-8229-56f984363c69.png" width="400px"> </div><br>
 
 可以通过 -Xss 这个虚拟机参数来指定每个线程的 Java 虚拟机栈内存大小：
 
@@ -59,7 +59,7 @@ java -Xss512M HackTheJava
 
 本地方法一般是用其它语言（C、C++ 或汇编语言等）编写的，并且被编译为基于本机硬件和操作系统的程序，对待这些方法需要特别处理。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/1_2001550547261811.png"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/66a6899d-c6b0-4a47-8569-9d08f0baf86c.png" width="300px"> </div><br>
 
 ## 堆
 
@@ -87,6 +87,8 @@ java -Xms1M -Xmx2M HackTheJava
 对这块区域进行垃圾回收的主要目标是对常量池的回收和对类的卸载，但是一般比较难实现。
 
 HotSpot 虚拟机把它当成永久代来进行垃圾回收。但很难确定永久代的大小，因为它受到很多因素影响，并且每次 Full GC 之后永久代的大小都会改变，所以经常会抛出 OutOfMemoryError 异常。为了更容易管理方法区，从 JDK 1.8 开始，移除永久代，并把方法区移至元空间，它位于本地内存中，而不是虚拟机内存中。
+
+方法区是一个 JVM 规范，永久代与元空间都是其一种实现方式。在 JDK 1.8 之后，原来永久代的数据被分到了堆和元空间中。元空间存储类的元信息，静态变量和常量池等放入堆中。
 
 ## 运行时常量池
 
@@ -142,7 +144,8 @@ Java 虚拟机使用该算法来判断对象是否可被回收，GC Roots 一般
 - 方法区中类静态属性引用的对象
 - 方法区中的常量引用的对象
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/6dd28bfc-6ef7-47cb-af50-a681ebc1bbaa.png"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/83d909d2-3858-4fe1-8ff4-16471db0b180.png" width="350px"> </div><br>
+
 
 ### 3. 方法区的回收
 
@@ -222,10 +225,13 @@ obj = null;
 
 ### 1. 标记 - 清除
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/3_2001550547558008.png"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/005b481b-502b-4e3f-985d-d043c2b330aa.png" width="400px"> </div><br>
 
+在标记阶段，程序会检查每个对象是否为活动对象，如果是活动对象，则程序会在对象头部打上标记。
 
-标记要回收的对象，然后清除。
+在清除阶段，会进行对象回收并取消标志位，另外，还会判断回收后的分块与前一个空闲分块是否连续，若连续，会合并这两个分块。回收对象就是把对象作为分块，连接到被称为 “空闲链表” 的单向链表，之后进行分配时只需要遍历这个空闲链表，就可以找到分块。
+
+在分配时，程序会搜索空闲链表寻找空间大于等于新对象大小 size 的块 block。如果它找到的块等于 size，会直接返回这个分块；如果找到的块大于 size，会将块分割成大小为 size 与 (block - size) 的两部分，返回大小为 size 的分块，并把大小为 (block - size) 的块返回给空闲链表。
 
 不足：
 
@@ -234,9 +240,7 @@ obj = null;
 
 ### 2. 标记 - 整理
 
-
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/2_2001550547456403.png"/> </div><br>
-
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/ccd773a5-ad38-4022-895c-7ac318f31437.png" width="400px"> </div><br>
 
 让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。
 
@@ -246,11 +250,11 @@ obj = null;
 
 不足:
 
-- 在标记-清除的基础上还需进行对象的移动，成本相对较高
+- 需要移动大量对象，处理效率比较低。
 
 ### 3. 复制
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/4_2001550547640585.png"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/b2b77b9e-958c-4016-8ae5-9c6edd83871e.png" width="400px"> </div><br>
 
 将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，然后再把使用过的内存空间进行一次清理。
 
@@ -452,7 +456,7 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 ## 类的生命周期
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/303873db-0d11-4683-a43c-f319b7aef2b6.jpg"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/335fe19c-4a76-45ab-9320-88c90d6a0d7e.png" width="600px"> </div><br>
 
 包括以下 7 个阶段：
 
@@ -625,7 +629,7 @@ System.out.println(ConstClass.HELLOWORLD);
 
 下图展示了类加载器之间的层次关系，称为双亲委派模型（Parents Delegation Model）。该模型要求除了顶层的启动类加载器外，其它的类加载器都要有自己的父类加载器。这里的父子关系一般通过组合关系（Composition）来实现，而不是继承关系（Inheritance）。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/805812fa-6ab5-4b8f-a0aa-3bdcadaa829d.png"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/0dd2d40a-5b2b-4d45-b176-e75a4cd4bdbf.png" width="500px"> </div><br>
 
 ### 1. 工作过程
 
@@ -754,5 +758,5 @@ public class FileSystemClassLoader extends ClassLoader {
 
 
 
-</br><div align="center">⭐️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 📚 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
+</br><div align="center">🎨️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
 <div align="center"><img width="180px" src="https://cyc-1256109796.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg"></img></div>

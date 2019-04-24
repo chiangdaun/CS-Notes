@@ -18,7 +18,7 @@
     * [含有相同元素求排列](#含有相同元素求排列)
     * [组合](#组合)
     * [组合求和](#组合求和)
-    * [含有相同元素的求组合求和](#含有相同元素的求组合求和)
+    * [含有相同元素的组合求和](#含有相同元素的组合求和)
     * [1-9 数字的组合求和](#1-9-数字的组合求和)
     * [子集](#子集)
     * [含有相同元素求子集](#含有相同元素求子集)
@@ -276,7 +276,7 @@ private int getShortestPath(List<Integer>[] graphic, int start, int end) {
 
 ## 查找最大的连通面积
 
-[695. Max Area of Island (Easy)](https://leetcode.com/problems/max-area-of-island/description/)
+[695. Max Area of Island (Medium)](https://leetcode.com/problems/max-area-of-island/description/)
 
 ```html
 [[0,0,1,0,0,0,0,1,0,0,0,0,0],
@@ -933,7 +933,7 @@ private void backtracking(List<Integer> tempCombination, List<List<Integer>> com
 }
 ```
 
-## 含有相同元素的求组合求和
+## 含有相同元素的组合求和
 
 [40. Combination Sum II (Medium)](https://leetcode.com/problems/combination-sum-ii/description/)
 
@@ -1214,11 +1214,12 @@ private int cubeNum(int i, int j) {
 
 45 度对角线标记数组的长度为 2 \* n - 1，通过下图可以明确 (r, c) 的位置所在的数组下标为 r + c。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/6646db4a-7f43-45e4-96ff-0891a57a9ade.jpg"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/9c422923-1447-4a3b-a4e1-97e663738187.jpg" width="300px"> </div><br>
+
 
 135 度对角线标记数组的长度也是 2 \* n - 1，(r, c) 的位置所在的数组下标为 n - 1 - (r - c)。
 
-<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/f1ff65ed-bbc2-4b92-8a94-7c5c0874da0f.jpg"/> </div><br>
+<div align="center"> <img src="https://gitee.com/CyC2018/CS-Notes/raw/master/docs/pics/7a85e285-e152-4116-b6dc-3fab27ba9437.jpg" width="300px"> </div><br>
 
 ```java
 private List<List<String>> solutions;
@@ -1270,5 +1271,5 @@ private void backtracking(int row) {
 
 
 
-</br><div align="center">⭐️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 📚 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
+</br><div align="center">🎨️欢迎关注我的公众号 CyC2018，在公众号后台回复关键字 **资料** 可领取复习大纲，这份大纲是我花了一整年时间整理的面试知识点列表，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点。可以说我基本是按照这份大纲来进行复习的，这份大纲对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。</div></br>
 <div align="center"><img width="180px" src="https://cyc-1256109796.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg"></img></div>
